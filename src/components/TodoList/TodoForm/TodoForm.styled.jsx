@@ -2,7 +2,16 @@ import styled from "styled-components";
 
 export const Forma = styled.form`
   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   gap: 0 10px;
+`;
+
+export const Label = styled.label`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Input = styled.input`

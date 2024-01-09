@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../../redux/todoList/tasksSlice";
 
-import { Input, Forma, Button } from "./TodoForm.styled";
+import { Input, Label, Forma, Button } from "./TodoForm.styled";
 
 const TodoForm = () => {
   const [value, setValue] = useState("");
@@ -31,16 +31,21 @@ const TodoForm = () => {
 
   return (
     <Forma onSubmit={handleSubmit}>
-      <Input
-        type="text"
-        name="text"
-        value={value}
-        onChange={handleChange}
-        placeholder="Enter task text..."
-      />
-      <Button type="submit" disabled={!visible}>
-        Add
-      </Button>
+      <Label htmlFor="text">
+        Task
+        <Input
+          type="text"
+          name="text"
+          value={value}
+          onChange={handleChange}
+          placeholder="Enter task text..."
+        />
+      </Label>
+      <div>
+        <Button type="submit" disabled={!visible}>
+          Add
+        </Button>
+      </div>
     </Forma>
   );
 };

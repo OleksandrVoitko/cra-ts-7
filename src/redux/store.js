@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { contactsReducer } from "./phoneBook/contactsSlice";
-import { filterContactsReducer } from "./phoneBook/filterContactsSlice";
+import { contactsApi } from "./phoneBook/contacts";
 import { filterReducer } from "./todoList/filterSlice";
 import { tasksReducer } from "./todoList/tasksSlice";
 
@@ -8,7 +7,8 @@ export const store = configureStore({
   reducer: {
     tasks: tasksReducer,
     filters: filterReducer,
-    contacts: contactsReducer,
-    filterContacts: filterContactsReducer,
+    [contactsApi.reducerPath]: contactsApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(contactsApi.middleware),
 });

@@ -1,7 +1,7 @@
-import { phoneBookInitialState } from "./phoneBook/initialState";
+// import { phoneBookInitialState } from "./phoneBook/initialState";
 import { todoListInitialState } from "./todoList/initialState";
 
 export const initialState = {
-  phoneBook: phoneBookInitialState,
+  // phoneBook: phoneBookInitialState,
   todoList: todoListInitialState,
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addContact } from "../../../redux/phoneBook/contactsSlice";
+// import { useDispatch } from "react-redux";
+// import { addContact } from "../../../redux/phoneBook/contactsSlice";
 
 import { Button, Forma, Input, Label } from "./ContactForm.styled";
 
@@ -9,7 +9,7 @@ const ContactForm = () => {
   const [phone, setPhone] = useState("");
   const [visible, setVisible] = useState(false);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (name && phone) {
@@ -22,7 +22,7 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addContact(name, phone));
+    // dispatch(addContact(name, phone));
     setName("");
     setPhone("");
   };
