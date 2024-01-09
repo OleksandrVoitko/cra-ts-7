@@ -1,33 +1,34 @@
-// import { useSelector } from "react-redux";
-// import { useSearchParams } from "react-router-dom";
-// import { TextP } from "./ContactCounter.styled";
+import { useSearchParams } from "react-router-dom";
+import { TextP } from "./ContactCounter.styled";
 
-const ContactCounter = () => {
-  // const contacts = useSelector((store) => store.contacts);
-
-  // const [searchParams] = useSearchParams();
-  // let filteredContacts = 0;
-  // let filter = "";
-  // if (searchParams.get("filter")) {
-  //   filter = searchParams.get("filter");
-  // }
-
-  // const renderedContscts = contacts.filter((contact) =>
-  //   contact.name.toLowerCase().includes(filter.toLowerCase())
-  // );
-
-  // if (filter) {
-  //   filteredContacts = renderedContscts.length;
-  // }
+const ContactCounter = ({
+  numberOfContacts,
+  numberOfFilteredContacts,
+  isFiltered,
+}) => {
+  const [searchParams] = useSearchParams();
+  let filteredValue = 0;
+  if (searchParams.get("filter")) {
+    filteredValue = numberOfFilteredContacts;
+  }
+  // const getFilteredValue = (searchParams) => {
+  //   if (searchParams.get("filter")) {
+  //     return numberOfFilteredContacts;
+  //   } else {
+  //     return 0;
+  //   }
+  // };
 
   return (
     <div>
-      {/* <TextP>
-        Total - <span>{contacts.length}</span>
-      </TextP>
       <TextP>
-        Filtered - <span>{filteredContacts}</span>
-      </TextP> */}
+        Total - <span>{numberOfContacts}</span>
+      </TextP>
+      {isFiltered && (
+        <TextP>
+          Filtered - <span>{filteredValue}</span>
+        </TextP>
+      )}
     </div>
   );
 };

@@ -1,13 +1,25 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-
 import { Input } from "./Filter.styled";
 
-const Filter = () => {
+const Filter = ({ setIsFiltered }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  let filter = "";
-  if (searchParams.get("filter")) {
-    filter = searchParams.get("filter");
-  }
+
+  useEffect(() => {
+    setIsFiltered(false);
+    if (searchParams.get("filter")) {
+      setIsFiltered(true);
+    }
+  }, [searchParams, setIsFiltered]);
+
+  const getFilter = (searchParams) => {
+    if (searchParams.get("filter")) {
+      const value = searchParams.get("filter");
+      return value;
+    } else {
+      return "";
+    }
+  };
 
   const handleChange = (e) => {
     setSearchParams({ filter: e.target.value });
@@ -18,7 +30,7 @@ const Filter = () => {
       <Input
         type="text"
         name="text"
-        value={filter}
+        value={getFilter(searchParams)}
         onChange={handleChange}
         placeholder="Enter searched name..."
       />
