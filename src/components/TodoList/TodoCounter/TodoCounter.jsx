@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
+// import { getArrayOfTascs } from "../../../utills/getArrayOfTascs";
 import { TextP } from "./TodoCounter.styled";
 
 const TodoCounter = () => {
-  const tasks = useSelector((state) => state.tasks);
+  // const tasks = getArrayOfTascs(useSelector((state) => state.tasks));
+  const tasks = useSelector((state) => state.tasks.tasks);
+
   const count = tasks.reduce(
     (acc, task) => {
       if (task.completed) {

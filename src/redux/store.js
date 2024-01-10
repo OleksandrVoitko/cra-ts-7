@@ -2,6 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { contactsApi } from "./phoneBook/contacts";
 import { filterReducer } from "./todoList/filterSlice";
 import { tasksReducer } from "./todoList/tasksSlice";
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +19,11 @@ export const store = configureStore({
     [contactsApi.reducerPath]: contactsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(contactsApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(contactsApi.middleware),
 });
+
+export const persistor = persistStore(store);

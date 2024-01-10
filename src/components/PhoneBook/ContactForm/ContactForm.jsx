@@ -3,8 +3,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { TailSpin } from "react-loader-spinner";
 import { useCreateContactMutation } from "../../../redux/phoneBook/contacts";
-// import { useDispatch } from "react-redux";
-// import { addContact } from "../../../redux/phoneBook/contactsSlice";
 
 import { Button, Forma, Input, Label } from "./ContactForm.styled";
 
@@ -13,8 +11,6 @@ const ContactForm = () => {
   const [phone, setPhone] = useState("");
   const [visible, setVisible] = useState(false);
   const [createContact, { isLoading }] = useCreateContactMutation();
-
-  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (name && phone) {
@@ -52,8 +48,6 @@ const ContactForm = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
-
-    // dispatch(addContact(name, phone));
   };
 
   return (
@@ -68,6 +62,8 @@ const ContactForm = () => {
           minLength="2"
           placeholder="Enter name..."
           required
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         />
       </Label>
 
@@ -81,6 +77,8 @@ const ContactForm = () => {
           minLength="2"
           placeholder="Enter phone..."
           required
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         />
       </Label>
       <div>
