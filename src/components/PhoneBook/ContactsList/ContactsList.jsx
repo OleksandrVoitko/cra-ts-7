@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 import { useFetchContactsQuery } from "../../../redux/phoneBook/contacts";
 import Contact from "../Contact/Contact";
-import { Li, Ul } from "./ContactsList.styled";
+import { Wrapper, Li, Ul } from "./ContactsList.styled";
 
 const ContactsList = ({ setNumberOfContacts, setNumberOfFilteredContacts }) => {
   const { isLoading, data: contacts } = useFetchContactsQuery();
@@ -53,15 +54,19 @@ const ContactsList = ({ setNumberOfContacts, setNumberOfFilteredContacts }) => {
   };
 
   return (
-    <Ul>
-      {isLoading && <p>Loading...</p>}
-      {getFilteredContacts(contacts) &&
-        getFilteredContacts(contacts).map((contact) => (
-          <Li key={contact.id}>
-            <Contact contact={contact} />
-          </Li>
-        ))}
-    </Ul>
+    <Wrapper>
+      <div>
+        {isLoading && <TailSpin color="orangered" height={53} width={53} />}
+      </div>
+      <Ul>
+        {getFilteredContacts(contacts) &&
+          getFilteredContacts(contacts).map((contact) => (
+            <Li key={contact.id}>
+              <Contact contact={contact} />
+            </Li>
+          ))}
+      </Ul>
+    </Wrapper>
   );
 };
 

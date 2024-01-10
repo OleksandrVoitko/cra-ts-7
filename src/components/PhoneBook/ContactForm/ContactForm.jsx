@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import { TailSpin } from "react-loader-spinner";
+import { useCreateContactMutation } from "../../../redux/phoneBook/contacts";
 // import { useDispatch } from "react-redux";
 // import { addContact } from "../../../redux/phoneBook/contactsSlice";
 
@@ -8,6 +12,7 @@ const ContactForm = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [visible, setVisible] = useState(false);
+  const [createContact, { isLoading }] = useCreateContactMutation();
 
   // const dispatch = useDispatch();
 
@@ -19,20 +24,36 @@ const ContactForm = () => {
     }
   }, [name, phone]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // dispatch(addContact(name, phone));
-    setName("");
-    setPhone("");
-  };
-
   const handleChange = (e) => {
     if (e.target.id === "name") {
       setName(e.target.value);
     } else {
       setPhone(e.target.value);
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const newContact = {
+      name,
+      number: phone,
+    };
+
+    try {
+      await createContact(newContact);
+      toast.success(`Contact: ${name} - added!`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setName("");
+      setPhone("");
+    } catch (error) {
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+
+    // dispatch(addContact(name, phone));
   };
 
   return (
@@ -63,10 +84,15 @@ const ContactForm = () => {
         />
       </Label>
       <div>
-        <Button type="submit" disabled={!visible}>
-          Add
-        </Button>
+        {isLoading ? (
+          <TailSpin color="orangered" height={53} width={53} />
+        ) : (
+          <Button type="submit" disabled={!visible}>
+            Add
+          </Button>
+        )}
       </div>
+      <ToastContainer />
     </Forma>
   );
 };

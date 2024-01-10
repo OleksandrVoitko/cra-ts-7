@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
 export const Ul = styled.ul`
   margin: 0;
   padding: 0;
