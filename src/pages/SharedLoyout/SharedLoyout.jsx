@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 import { Container, Header, Logo, NavigationLink } from "./SharedLoyout.styled";
 
 const SharedLoyout = () => {
@@ -18,7 +19,9 @@ const SharedLoyout = () => {
           </NavigationLink>
         </nav>
       </Header>
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense
+        fallback={<TailSpin color="orangered" height={53} width={53} />}
+      >
         <Outlet />
       </Suspense>
     </Container>
