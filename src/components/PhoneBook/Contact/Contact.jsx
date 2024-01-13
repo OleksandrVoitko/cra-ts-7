@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
 import { useDeleteContactMutation } from "../../../redux/phoneBook/contacts";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { TailSpin } from "react-loader-spinner";
 
 import { Button, DivWrapper, PText } from "./Contacts.styled";
@@ -30,8 +30,6 @@ const Contact = ({ contact }) => {
           <MdClose size={24} />
         </Button>
       )}
-
-      <ToastContainer />
     </DivWrapper>
   );
 };

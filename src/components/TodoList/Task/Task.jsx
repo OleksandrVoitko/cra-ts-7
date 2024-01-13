@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import {
   deleteTask,
@@ -14,9 +14,7 @@ const Task = ({ task }) => {
   const handleChange = () => dispatch(toggleCompleted(task.id));
   const handleClick = () => {
     dispatch(deleteTask(task.id));
-    toast.success(`Todo deleted!`, {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toast.success(`Todo deleted!`);
   };
 
   return (
@@ -30,7 +28,6 @@ const Task = ({ task }) => {
       <Button disabled={!task.completed} onClick={handleClick}>
         <MdClose size={24} />
       </Button>
-      <ToastContainer />
     </DivWrapper>
   );
 };

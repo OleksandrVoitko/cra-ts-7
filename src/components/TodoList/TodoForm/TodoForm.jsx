@@ -24,9 +24,7 @@ const TodoForm = () => {
     e.preventDefault();
 
     dispatch(addTask(value));
-    toast.success(`Todo added!`, {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toast.success(`Todo added!`);
     setValue("");
   };
 
